@@ -4,7 +4,9 @@ const log: debug.IDebugger = debug('pts:server');
 import * as http from 'http';
 import {port, host} from '../share/config'
 import apiSendMessage from './api-send-message';
+import apiCheckCredit from './api-check-credit';
 import {urlRegExp as sendMessageUrl} from './api-send-message';
+import {urlRegExp as checkCreditUrl} from './api-check-credit';
 import l10n from '../share/l10n';
 import sendAlert from '../share/send-alert';
 import {getClientAddress} from '../share/utill';
@@ -20,6 +22,12 @@ async function serverListener (request: http.IncomingMessage, response: http.Ser
 
   if (request.url.match(sendMessageUrl)) {
     const reply: any = await apiSendMessage(request);
+    returnData(response, reply);
+    return;
+  }
+
+  if (request.url.match(checkCreditUrl)) {
+    const reply: any = await apiCheckCredit(request);
     returnData(response, reply);
     return;
   }
