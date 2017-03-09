@@ -25,6 +25,7 @@ node_modules
 
 # env file
 .secret
+dev-env.sh
 
 # build files
 /dist
