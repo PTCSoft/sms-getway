@@ -11,13 +11,14 @@ export const urlRegExp: RegExp = new RegExp('^/v1/sendMessage/(\\w*)/?$');
 export default async function commandSendMessage (request:IncomingMessage): Promise<any> {
   log('commandSendMessage');
 
-  // extract tokenId from url
+  const requestIp = getClientAddress(request);
 
   const _token: string[] = urlRegExp.exec(request.url);
 
   if (!_token || _token.length !== 2) {
     sendAlert(101, {
-      url: request.url
+      url: request.url,
+      requestIp: requestIp
     });
     return {
       ok: false,
@@ -31,7 +32,8 @@ export default async function commandSendMessage (request:IncomingMessage): Prom
   if (request.method !== 'POST') {
     sendAlert(100, {
       method: request.method,
-      url: request.url
+      url: request.url,
+      requestIp: requestIp
     });
     return {
       ok: false,
@@ -40,12 +42,17 @@ export default async function commandSendMessage (request:IncomingMessage): Prom
   }
 
   const postData: string = await getPostData(request);
-  let data: Object;
+  let data: {
+    to: string,
+    text: string
+  };
   try {
     data = JSON.parse(postData);
   }
   catch (err) {
-    sendAlert(103, null, postData);
+    sendAlert(103, {
+      requestIp: requestIp
+    }, postData);
     return {
       ok: false,
       error_code: 103,
@@ -53,25 +60,41 @@ export default async function commandSendMessage (request:IncomingMessage): Prom
     };
   }
 
-  if (!data['request-ip']) {
-    data['request-ip'] = getClientAddress(request);
-  }
-
   try {
-    const resolute = await sendMesaage(token, data);
+    const resolute = await sendMesaage(token, data.to, data.text);
     return {
       ok: true,
       resolute: resolute
     }
   }
-  catch (errorCode) {
-    sendAlert(errorCode, {
-      token: token,
-      data: data
-    });
-    return {
-      ok: false,
-      error_code: errorCode
+  catch (err) {
+    if (err.code) {
+      sendAlert(err.code, {
+        token: token,
+        requestIp: requestIp,
+        data: data,
+        extra: err.extra
+      });
+      const ret: any = {
+        ok: false,
+        error_code: err.code
+      };
+      if (err.extra) ret.extra = err.extra;
+      return ret;
+    }
+
+    else {
+      sendAlert(104, {
+        token: token,
+        data: data,
+        requestIp: requestIp,
+        error: err.toString ? err.toString() : err,
+        stack: err.stack
+      });
+      return {
+        ok: false,
+        error_code: 104
+      }
     }
   }
 }
