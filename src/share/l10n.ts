@@ -8,7 +8,7 @@ var currentLanguageStorage = {
   'error_103': 'Cannot parse your data!',
   'error_104': 'Unexpected error in sending message!',
   'error_105': 'Necessary field in your data is missing!',
-  'error_106': 'sms center not defined properly for this token!',
+  'error_106': 'SMS center not defined properly for this token!',
 }
 
 export default function l10n (key: string) {

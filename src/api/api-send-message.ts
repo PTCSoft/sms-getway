@@ -15,7 +15,7 @@ export default async function commandSendMessage (request:IncomingMessage): Prom
 
   const _token: string[] = urlRegExp.exec(request.url);
 
-  if (!_token || _token.length !== 2) {
+  if (!_token || _token.length !== 2 || _token[1].length === 0) {
     sendAlert(101, {
       url: request.url,
       requestIp: requestIp
