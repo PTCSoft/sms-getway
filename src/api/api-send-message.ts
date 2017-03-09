@@ -1,5 +1,5 @@
 import * as debug from 'debug';
-const log: debug.IDebugger = debug('pts:server:sendmsg');
+const log: debug.IDebugger = debug('psg:api:sendmsg');
 
 import {IncomingMessage} from 'http';
 import l10n from '../share/l10n';
