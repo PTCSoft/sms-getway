@@ -74,48 +74,4 @@ export default async function commandSendMessage (request:IncomingMessage): Prom
       error_code: errorCode
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  let errorCode: number;
-
-  errorCode = sendMessage(tokenId, data);
-  log('sent, error code: ' + errorCode);
-
-  if (!errorCode) {
-    return {
-      ok: true
-    };
-  }
-
-  // else if errorCode
-  log('sendMessage error: ' + errorCode);
-  const returnObject: any = {
-    ok: false,
-    error_code: errorCode
-  }
-
-  if (errorCode === 102) {
-    if (sendLog) {
-      sendError(102);
-    }
-    return {
-      ok: true,
-      warning: l10n('error_102')
-    }
-  }
-
-  //else if errorCode != 102
-  sendError(errorCode);
-  return returnObject;
 }
