@@ -11,7 +11,7 @@ const db: oneDB = new oneDB(storagePrefix + 'token-list.json', [], saveDelay);
  */
 export type tokenObject = {
   token:    string,
-  phone:    string,
+  from:    string,
   panel:    string,
   username: string,
   password: string,
@@ -61,7 +61,7 @@ export function getTokenObj (tokenId: string, createNew: boolean = false): token
   if (createNew) {
     tokenObj = {
       token: tokenId,
-      phone: '',
+      from: '',
       panel: '',
       username: '',
       password: '',

@@ -27,7 +27,7 @@ export default async function (token: string, to: string, text: string): Promise
   const sendParameter = {
     username: tokenObj.username,
     password: tokenObj.password,
-    from: tokenObj.phone,
+    from: tokenObj.from,
     to: to,
     text: text
   };

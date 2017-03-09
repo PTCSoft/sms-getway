@@ -34,6 +34,7 @@ export async function sendMessage (parameter: sendParameter): Promise<any> {
   const resolute = await request(requestOption);
 
   const body = resolute.body ? resolute.body.trim() : null;
+  log('body:', body);
 
   if (body === '1' ) {
     return true;
