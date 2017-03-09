@@ -37,9 +37,10 @@ export function saveData () {
 
 /**
  * Get special token object by tokenId from tokenList.
+ *
  * @export
  * @param {string} tokenId
- * @param {string} createNew create new token if not exit
+ * @param {string} [createNew=false] create new token if not exit
  * @return {tokenObject}
  * @example
  *   let tokenObj = getTokenObj('123');
