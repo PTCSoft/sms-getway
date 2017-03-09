@@ -9,6 +9,8 @@ var currentLanguageStorage = {
   'error_104': 'Unexpected error in sending message!',
   'error_105': 'Necessary field in your data is missing!',
   'error_106': 'SMS center not defined properly for this token!',
+  'error_107': 'Unexpected sms panel api error!',
+  'error_110': 'SMS not send!',
 }
 
 export default function l10n (key: string) {
