@@ -1,8 +1,7 @@
 import * as debug from 'debug';
-const log: debug.IDebugger = debug('utill');
+const log: debug.IDebugger = debug('psg:utill');
 
 import {IncomingMessage} from 'http';
-import {chatObject} from './storage';
 
 /**
  * Parse str and replace all $name with process.env.name and repeat twice becaouse process.env.name can have $another-name
@@ -19,6 +18,7 @@ export function parseEnv (str: string): string {
   return _parseEnv(_parseEnv(str));
 }
 
+const $enviromentPatern = /\$([^/$]+)/g;
 /**
  * Parse str and replace all $name with process.env.name
  * @param {string} str  Target string value contain $
@@ -26,7 +26,7 @@ export function parseEnv (str: string): string {
  */
 function _parseEnv (str: string): string {
   log(`parseEnv: ${str}`);
-  return str.replace(/\$([^/$]+)/g, (_, n) => {
+  return str.replace($enviromentPatern, (_, n) => {
     return process.env[n] || '';
   });
 }
