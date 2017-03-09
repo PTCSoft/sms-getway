@@ -1,2 +1,8 @@
 #!/bin/bash
-DEBUG=*
+# export host="0.0.0.0"
+# export port="8080"
+# export PSG_STORAGE_PREFIX="./storage/"
+# export saveDelay="15000"
+# export PSG_ALERT_URL="http://alert.ptcvdep.com"
+# export PSG_ALERT_TOKEN=""
+export DEBUG=*
