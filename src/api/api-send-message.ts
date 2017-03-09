@@ -62,13 +62,21 @@ export default async function commandSendMessage (request:IncomingMessage): Prom
 
   try {
     const resolute = await sendMesaage(token, data.to, data.text);
+    if (resolute === false) {
+      sendAlert(110, {
+        token: token,
+        requestIp: requestIp,
+        data: data
+      });
+    }
     return {
       ok: true,
       resolute: resolute
     }
   }
   catch (err) {
-    if (err.code) {
+    log('Error:', err);
+    if (typeof err.code === 'number') {
       sendAlert(err.code, {
         token: token,
         requestIp: requestIp,
