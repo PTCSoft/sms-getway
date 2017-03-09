@@ -4,10 +4,11 @@ var currentLanguageStorage = {
 
   'error_100': 'Request method must be `POST`.',
   'error_101': 'Token in not defined in url!',
-  'error_102': 'Token is not valid!',
+  'error_102': 'Token in not valid!',
   'error_103': 'Cannot parse your data!',
+  'error_104': 'Unexpected error in sending message!',
   'error_105': 'Necessary field in your data is missing!',
-  'error_104': 'Error in sending message!'
+  'error_106': 'sms center not defined properly for this token!',
 }
 
 export default function l10n (key: string) {
