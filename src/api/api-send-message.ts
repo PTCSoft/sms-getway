@@ -6,6 +6,7 @@ import l10n from '../share/l10n';
 import sendAlert from '../share/send-alert';
 import {getPostData, getClientAddress} from '../share/utill';
 import sendMesaage from '../sms-center/send-message';
+import {smsDataType} from '../sms-center/send-message';
 
 export const urlRegExp: RegExp = new RegExp('^/v1/sendMessage/(\\w*)/?$');
 export default async function commandSendMessage (request:IncomingMessage): Promise<any> {
@@ -42,10 +43,7 @@ export default async function commandSendMessage (request:IncomingMessage): Prom
   }
 
   const postData: string = await getPostData(request);
-  let data: {
-    to: string,
-    text: string
-  };
+  let data: smsDataType;
   try {
     data = JSON.parse(postData);
   }
@@ -61,7 +59,7 @@ export default async function commandSendMessage (request:IncomingMessage): Prom
   }
 
   try {
-    const resolute = await sendMesaage(token, data.to, data.text);
+    const resolute = await sendMesaage(token, data);
     if (resolute === false) {
       sendAlert(110, {
         token: token,

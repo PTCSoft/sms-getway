@@ -8,14 +8,21 @@ import {getTokenObj} from '../share/storage';
 const sendSMS = {};
 sendSMS['payam-resan'] = require('./payam-resan/send-message').sendMessage;
 
-export default async function (token: string, to: string, text: string): Promise<any> {
+export type smsDataType = {
+  to:        string,
+  text:      string,
+  username?: string,
+  password?: string
+};
+
+export default async function (token: string, smsData: smsDataType): Promise<any> {
   const tokenObj = getTokenObj(token);
 
   if (!tokenObj) {
     throw {code: 102};
   }
 
-  if (!to || !text) {
+  if (!smsData.to || !smsData.text) {
     throw {code: 105};
   }
 
@@ -25,11 +32,11 @@ export default async function (token: string, to: string, text: string): Promise
   }
 
   const sendParameter = {
-    username: tokenObj.username,
-    password: tokenObj.password,
+    username: smsData.username || tokenObj.username,
+    password: smsData.password || tokenObj.password,
     from: tokenObj.from,
-    to: to,
-    text: text
+    to: smsData.to,
+    text: smsData.text,
   };
   return sendMessage(sendParameter);
 }
