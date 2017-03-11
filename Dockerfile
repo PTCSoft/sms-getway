@@ -15,4 +15,4 @@ COPY . /usr/src/app
 RUN npm run build
 
 LABEL Name="ptc-sms-getway" \
-      Version="1.0.0-beta"
+      Version="1.0.0-beta.2"
