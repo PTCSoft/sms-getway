@@ -1,6 +1,8 @@
 import {parseEnv, getBoolEnv} from './utill';
 
-export const version: string = parseEnv('$npm_package_version') || '0.0.0';
+export const appName: string = parseEnv('$npm_package_name');
+export const appDescription: string = parseEnv('$npm_package_description');
+export const appVersion: string = parseEnv('$npm_package_version');
 
 export const storagePrefix: string = parseEnv('$PSG_STORAGE_PREFIX') || './storage/';
 

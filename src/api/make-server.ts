@@ -2,7 +2,7 @@ import * as debug from 'debug';
 const log: debug.IDebugger = debug('pts:server');
 
 import * as http from 'http';
-import {port, host} from '../share/config'
+import {port, host, appDescription, appVersion} from '../share/config'
 import apiSendMessage from './api-send-message';
 import apiCheckCredit from './api-check-credit';
 import {urlRegExp as sendMessageUrl} from './api-send-message';
@@ -20,34 +20,43 @@ console.log(`Server start on http://${host}:${port}/`);
 async function serverListener (request: http.IncomingMessage, response: http.ServerResponse) {
   log(`New request: ${request.url}`);
 
-  if (request.url.match(sendMessageUrl)) {
+  if (request.url === '/') {
+    returnData(response, {
+      ok: true,
+      welcome: true,
+      application: appDescription,
+      version: appVersion
+    });
+  }
+
+  else if (request.url.match(sendMessageUrl)) {
     const reply: any = await apiSendMessage(request);
     returnData(response, reply);
     return;
   }
 
-  if (request.url.match(checkCreditUrl)) {
+  else if (request.url.match(checkCreditUrl)) {
     const reply: any = await apiCheckCredit(request);
     returnData(response, reply);
     return;
   }
 
-  //else
-  if (request.url === '/favicon.ico') {
+  else if (request.url === '/favicon.ico') {
     responseFavicon(response);
     return;
   }
 
-  //else
-  returnData(response, {
-    ok: false,
-    error_code: 404
-  });
-  sendAlert(404, {
-    ip: getClientAddress(request),
-    url: request.url,
-    method: request.method,
-  });
+  else {
+    returnData(response, {
+      ok: false,
+      error_code: 404
+    });
+    sendAlert(404, {
+      ip: getClientAddress(request),
+      url: request.url,
+      method: request.method,
+    });
+  }
 }
 
 function returnData (response: http.ServerResponse, data: Object) {
