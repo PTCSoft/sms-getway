@@ -2,6 +2,7 @@ var currentLanguageStorage = {
   'error_404': 'Command not found!',
   'error_500': 'Ooops! Server error!',
 
+  'error_1'  : 'Application restarted',
   'error_100': 'Request method must be `POST`.',
   'error_101': 'Token in not defined in url!',
   'error_102': 'Token in not valid!',
