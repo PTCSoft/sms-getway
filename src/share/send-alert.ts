@@ -35,7 +35,7 @@ export default async function sendAlert (code: number, extra: any, file?: any) {
     }
     else {
       log('Error in sending alert!');
-      log(resolute.response);
+      // log(resolute.response);
     }
   }
   catch (err) {
