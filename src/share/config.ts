@@ -1,5 +1,7 @@
 import {parseEnv, getBoolEnv} from './utill';
 
+export const version: string = parseEnv('$npm_package_version') || '0.0.0';
+
 export const storagePrefix: string = parseEnv('$PSG_STORAGE_PREFIX') || './storage/';
 
 export const saveDelay: number = parseInt(parseEnv('$PSG_SAVE_DELAY')) || 15000;
