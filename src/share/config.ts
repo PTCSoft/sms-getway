@@ -11,7 +11,7 @@ export const port: number = parseInt(parseEnv('$PSG_SERVER_PORT')) || 8080;
 export const host: string = parseEnv('$PSG_SERVER_HOST') || '0.0.0.0';
 
 export const alertUrl: string = (function (): string {
-  let url: string = parseEnv('$PSG_ALERT_URL') || 'http://alert.ptcvdep.com';
+  let url: string = parseEnv('$PSG_ALERT_URL') || 'http://telegram-alert.ptcvdep.net';
   if (url.substr(-1) === '/') {
     // remove end slash
     url = url.substr(0, url.length-1);
