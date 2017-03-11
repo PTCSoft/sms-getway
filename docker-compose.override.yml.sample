@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  node:
+    restart: no
+    volumes:
+      - ./dist:/usr/src/app/dist:ro
+    ports:
+      - "41180:8080"
