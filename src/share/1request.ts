@@ -1,0 +1,42 @@
+import debug = require('debug');
+const log = debug('1request');
+import request = require('request');
+const timeout = 20000;
+
+log('init');
+
+export default function (options): Promise<{response: any, body: any}> {
+  if (!options.timeout) options.timeout = timeout;
+  log(options);
+
+  return new Promise((resolve, reject) => {
+    try {
+      let skip = false;
+      let _timeout = setTimeout(() => {
+        skip = true;
+        reject('Error: ETIMEDOUT');
+      }, options.timeout);
+
+      request(options, (err, response, body) => {
+        log('response');
+        log(body);
+        if (skip) {
+          log('skiped!', err);
+          return;
+        }
+        clearTimeout(_timeout);
+
+        if (err) {
+          setImmediate(reject, err);
+        }
+        else {
+          setImmediate(resolve, {response: response, body: body});
+        }
+      });
+    }
+    catch (err){
+      log('err', err);
+      setImmediate(reject, err);
+    }
+  });
+}

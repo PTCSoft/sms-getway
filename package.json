@@ -1,0 +1,35 @@
+{
+  "name": "sms-getway",
+  "version": "1.0.0-beta",
+  "description": "PTC SMS Getway",
+  "engines": {
+    "node": ">=6.5"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "postinstall": "npm run build",
+    "start": "node dist/index.js",
+    "build": "rm -rf ./dist/* && tsc -p .",
+    "pretest": "npm run build",
+    "test": "echo 'no test!'",
+    "watch": "npm run build -- --watch",
+    "tsc": "tsc",
+    "preserve": "npm run build",
+    "serve": ". ./dev-env.sh && node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PTCSoft/sms-getway.git"
+  },
+  "author": "PTC Corporation <info@ptc.co.ir>",
+  "license": "Copyright © 2016 PTC Corporation, All rights reserved",
+  "dependencies": {
+    "@types/debug": "0.0.29",
+    "@types/node": "^7.0.5",
+    "@types/request": "0.0.41",
+    "debug": "^2.6.1",
+    "request": "^2.80.0",
+    "typescript": "^2.1.6"
+  },
+  "devDependencies": {}
+}

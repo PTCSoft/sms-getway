@@ -1,0 +1,23 @@
+version: '2'
+
+networks:
+  server-proxy:
+    external:
+      name: webnet
+
+services:
+  node:
+    build: .
+    env_file: .secret
+    volumes:
+      - ./storage:/usr/src/app/storage:Z
+    mem_limit: 256m
+    networks:
+      - server-proxy
+    restart: always
+    tty: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 20m
+        max-file: "2"
