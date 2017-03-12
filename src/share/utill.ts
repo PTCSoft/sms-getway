@@ -86,7 +86,7 @@ export function mkdirSync (path: string, mode: number = _0777) {
  *   ley hashKey: string = hashString(key);
  */
 export function hashString (string: string, length: number): string {
-  log('hashString');
+  log('hashString', {string: string, length: length});
 
   let i: number, hash: number = 0;
   for (i = 0; i<string.length; i++){

@@ -19,8 +19,7 @@ http
 console.log(`Server start on http://${host}:${port}/`);
 
 async function serverListener (request: http.IncomingMessage, response: http.ServerResponse) {
-  log('serverListener');
-  log(`New request: ${request.url}`);
+  log(`serverListener, New request: ${request.url}`);
 
   request.url = parseUrl(request.url, false).pathname; // remove query strings
 
