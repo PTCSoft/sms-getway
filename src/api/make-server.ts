@@ -1,5 +1,5 @@
 import * as debug from 'debug';
-const log: debug.IDebugger = debug('pts:server');
+const log: debug.IDebugger = debug('psg:server');
 
 import * as http from 'http';
 import {port, host} from '../share/config'
@@ -18,6 +18,7 @@ http
 console.log(`Server start on http://${host}:${port}/`);
 
 async function serverListener (request: http.IncomingMessage, response: http.ServerResponse) {
+  log('serverListener');
   log(`New request: ${request.url}`);
 
   if (request.url.match(sendMessageUrl)) {
@@ -51,6 +52,8 @@ async function serverListener (request: http.IncomingMessage, response: http.Ser
 }
 
 function returnData (response: http.ServerResponse, data: Object) {
+  log('returnData');
+
   if (data['error_code']) {
     data['error_description'] = l10n('error_' + data['error_code']);
   }
@@ -66,11 +69,15 @@ function returnData (response: http.ServerResponse, data: Object) {
 }
 
 function responseFavicon (response: http.ServerResponse) {
+  log('responseFavicon');
+
   const faviconUrl: string = 'http://app.ptciorder.com/favicon.ico';
   redirectUrl(response, faviconUrl);
 }
 
 function redirectUrl (response: http.ServerResponse, url: string, permanently: boolean = false) {
+  log('redirectUrl');
+
   const code: number  = permanently ? 301 : 302;
   const heads: any = {
     'Location': url,

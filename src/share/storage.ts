@@ -86,6 +86,8 @@ const hashLength: number = 3;
  *   if (!isValidToken('123')) console.error('Your token is not validate.');
  */
 export function isValidToken (token: string): boolean {
+  log('isValidToken');
+
   if (!token || token.length < hashLength*2) {
     return false;
   }
