@@ -4,6 +4,8 @@ export const appName: string = parseEnv('$npm_package_name');
 export const appDescription: string = parseEnv('$npm_package_description');
 export const appVersion: string = parseEnv('$npm_package_version');
 
+export const faviconUrl: string = parseEnv('$npm_package_config_faviconUrl');
+
 export const storagePrefix: string = parseEnv('$PSG_STORAGE_PREFIX') || './storage/';
 
 export const saveDelay: number = parseInt(parseEnv('$PSG_SAVE_DELAY')) || 15000;

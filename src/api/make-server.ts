@@ -2,7 +2,7 @@ import * as debug from 'debug';
 const log: debug.IDebugger = debug('psg:server');
 
 import * as http from 'http';
-import {port, host, appDescription, appVersion} from '../share/config'
+import {port, host, appDescription, appVersion, faviconUrl} from '../share/config'
 import apiSendMessage from './api-send-message';
 import apiCheckCredit from './api-check-credit';
 import {urlRegExp as sendMessageUrl} from './api-send-message';
@@ -79,8 +79,6 @@ function returnData (response: http.ServerResponse, data: Object) {
 
 function responseFavicon (response: http.ServerResponse) {
   log('responseFavicon');
-
-  const faviconUrl: string = 'http://app.ptciorder.com/favicon.ico';
   redirectUrl(response, faviconUrl);
 }
 

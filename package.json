@@ -6,6 +6,9 @@
     "node": ">=6.5"
   },
   "main": "dist/index.js",
+  "config": {
+    "faviconUrl" : "http://www.payam-resan.com/favicon.ico"
+  },
   "scripts": {
     "postinstall": "npm run build",
     "start": "node dist/index.js",
