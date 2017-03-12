@@ -9,4 +9,4 @@
 #export PSG_ALERT_URL="http://telegram-alert.ptcvdep.net"
 #export PSG_ALERT_TOKEN=""
 
-export DEBUG=PSG:*
+export DEBUG=psg:*
