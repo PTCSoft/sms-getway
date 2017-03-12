@@ -86,6 +86,8 @@ export function mkdirSync (path: string, mode: number = _0777) {
  *   ley hashKey: string = hashString(key);
  */
 export function hashString (string: string, length: number): string {
+  log('hashString', {string: string, length: length});
+
   let i: number, hash: number = 0;
   for (i = 0; i<string.length; i++){
     hash += string.charCodeAt(i) * 1.2;
@@ -99,13 +101,17 @@ export function hashString (string: string, length: number): string {
 }
 
 export function getClientAddress (request: IncomingMessage) {
-    return (request.headers['x-forwarded-for'] || '').split(',')[0] || request.connection.remoteAddress;
+  log('getClientAddress');
+
+  return (request.headers['x-forwarded-for'] || '').split(',')[0] || request.connection.remoteAddress;
 };
 
 /**
  * Extract post data from http request
  */
 export async function getPostData (request: IncomingMessage): Promise<any> {
+  log('getPostData');
+
   return new Promise(function (resolve: Function) {
     let data: string = '';
     request.on('data', (_data) => {

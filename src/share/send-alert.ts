@@ -7,6 +7,7 @@ import * as debug from 'debug';
 const log: debug.IDebugger = debug('psg:send-alert');
 
 export default async function sendAlert (code: number, extra: any, file?: any) {
+  log('sendAlert');
   log(code);
 
   if (!alertToken) {
@@ -35,7 +36,7 @@ export default async function sendAlert (code: number, extra: any, file?: any) {
     }
     else {
       log('Error in sending alert!');
-      log(resolute.response);
+      // log(resolute.response);
     }
   }
   catch (err) {
@@ -45,6 +46,7 @@ export default async function sendAlert (code: number, extra: any, file?: any) {
 }
 
 export async function sendTelegramMessage (data: any) {
+  log('sendTelegramMessage');
   log(data);
 
   if (!alertToken) {

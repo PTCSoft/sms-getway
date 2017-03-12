@@ -6,7 +6,7 @@
 #export PSG_STORAGE_PREFIX="./storage/"
 #export PSG_SAVE_DELAY="15000"
 
-#export PSG_ALERT_URL="http://alert.ptcvdep.com"
+#export PSG_ALERT_URL="http://telegram-alert.ptcvdep.net"
 #export PSG_ALERT_TOKEN=""
 
-export DEBUG=PSG:*
+export DEBUG=psg:*

@@ -17,6 +17,8 @@ export type smsDataType = {
 };
 
 export default async function (token: string, smsData: smsDataType): Promise<any> {
+  log('sms send message');
+
   const tokenObj = getTokenObj(token);
 
   if (!tokenObj) {

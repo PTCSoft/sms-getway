@@ -1,8 +1,9 @@
 import * as debug from 'debug';
-const log: debug.IDebugger = debug('pts:server');
+const log: debug.IDebugger = debug('psg:server');
 
 import * as http from 'http';
-import {port, host} from '../share/config'
+import {parse as parseUrl} from 'url';
+import {port, host, appDescription, appVersion, faviconUrl} from '../share/config'
 import apiSendMessage from './api-send-message';
 import apiCheckCredit from './api-check-credit';
 import {urlRegExp as sendMessageUrl} from './api-send-message';
@@ -18,39 +19,52 @@ http
 console.log(`Server start on http://${host}:${port}/`);
 
 async function serverListener (request: http.IncomingMessage, response: http.ServerResponse) {
-  log(`New request: ${request.url}`);
+  log(`serverListener, New request: ${request.url}`);
 
-  if (request.url.match(sendMessageUrl)) {
+  request.url = parseUrl(request.url, false).pathname; // remove query strings
+
+  if (request.url === '/') {
+    returnData(response, {
+      ok: true,
+      welcome: true,
+      application: appDescription,
+      version: appVersion
+    });
+  }
+
+  else if (request.url.match(sendMessageUrl)) {
     const reply: any = await apiSendMessage(request);
     returnData(response, reply);
     return;
   }
 
-  if (request.url.match(checkCreditUrl)) {
+  else if (request.url.match(checkCreditUrl)) {
     const reply: any = await apiCheckCredit(request);
     returnData(response, reply);
     return;
   }
 
-  //else
-  if (request.url === '/favicon.ico') {
+  else if (request.url === '/favicon.ico') {
     responseFavicon(response);
     return;
   }
 
-  //else
-  returnData(response, {
-    ok: false,
-    error_code: 404
-  });
-  sendAlert(404, {
-    ip: getClientAddress(request),
-    url: request.url,
-    method: request.method,
-  });
+  else {
+    returnData(response, {
+      ok: false,
+      error_code: 404
+    });
+    sendAlert(404, {
+      ip: getClientAddress(request),
+      url: request.url,
+      method: request.method,
+    });
+  }
 }
 
 function returnData (response: http.ServerResponse, data: Object) {
+  log('returnData');
+
   if (data['error_code']) {
     data['error_description'] = l10n('error_' + data['error_code']);
   }
@@ -66,11 +80,13 @@ function returnData (response: http.ServerResponse, data: Object) {
 }
 
 function responseFavicon (response: http.ServerResponse) {
-  const faviconUrl: string = 'http://app.ptciorder.com/favicon.ico';
+  log('responseFavicon');
   redirectUrl(response, faviconUrl);
 }
 
 function redirectUrl (response: http.ServerResponse, url: string, permanently: boolean = false) {
+  log('redirectUrl');
+
   const code: number  = permanently ? 301 : 302;
   const heads: any = {
     'Location': url,

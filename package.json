@@ -1,11 +1,14 @@
 {
   "name": "sms-getway",
-  "version": "1.0.0-beta",
+  "version": "1.0.0",
   "description": "PTC SMS Getway",
   "engines": {
     "node": ">=6.5"
   },
   "main": "dist/index.js",
+  "config": {
+    "faviconUrl" : "http://www.payam-resan.com/favicon.ico"
+  },
   "scripts": {
     "postinstall": "npm run build",
     "start": "node dist/index.js",
