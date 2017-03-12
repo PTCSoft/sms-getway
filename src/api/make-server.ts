@@ -2,6 +2,7 @@ import * as debug from 'debug';
 const log: debug.IDebugger = debug('psg:server');
 
 import * as http from 'http';
+import {parse as parseUrl} from 'url';
 import {port, host, appDescription, appVersion, faviconUrl} from '../share/config'
 import apiSendMessage from './api-send-message';
 import apiCheckCredit from './api-check-credit';
@@ -20,6 +21,8 @@ console.log(`Server start on http://${host}:${port}/`);
 async function serverListener (request: http.IncomingMessage, response: http.ServerResponse) {
   log('serverListener');
   log(`New request: ${request.url}`);
+
+  request.url = parseUrl(request.url, false).pathname; // remove query strings
 
   if (request.url === '/') {
     returnData(response, {
