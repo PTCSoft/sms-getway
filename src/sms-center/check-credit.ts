@@ -9,6 +9,8 @@ const checkCreditFn = {};
 checkCreditFn['payam-resan'] = require('./payam-resan/check-credit').checkCredit;
 
 export default async function (token: string): Promise<any> {
+  log('sms check credit');
+
   const tokenObj = getTokenObj(token);
 
   if (!tokenObj) {

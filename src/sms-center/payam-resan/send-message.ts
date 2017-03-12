@@ -13,6 +13,8 @@ type sendParameter = {
 };
 
 export async function sendMessage (parameter: sendParameter): Promise<any> {
+  log('sendMessage');
+
   const requestOption: any = {
     method: 'POST',
     url: url,
@@ -29,7 +31,7 @@ export async function sendMessage (parameter: sendParameter): Promise<any> {
     }
   }
 
-  log(requestOption)
+  log(requestOption);
 
   const resolute = await request(requestOption);
 

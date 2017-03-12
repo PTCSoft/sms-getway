@@ -10,6 +10,8 @@ type checkParameter = {
 };
 
 export async function checkCredit (parameter: checkParameter): Promise<any> {
+  log('checkCredit');
+
   const requestOption: any = {
     method: 'POST',
     url: url,
@@ -23,7 +25,7 @@ export async function checkCredit (parameter: checkParameter): Promise<any> {
     }
   }
 
-  log(requestOption)
+  log(requestOption);
 
   const resolute = await request(requestOption);
 
