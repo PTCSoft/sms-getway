@@ -1,0 +1,469 @@
+{
+	"variables": [],
+	"info": {
+		"name": "SMS GETWAY",
+		"_postman_id": "e76f1a91-432c-3efa-66c8-80032ffdc03f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Errors",
+			"description": "",
+			"item": [
+				{
+					"name": "error_404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"'use strict';",
+									"/*global",
+									"tests, postman, responseBody, responseCode",
+									"*/",
+									"const testVersion = postman.getGlobalVariable(\"PTS_TESET_VERSION\");",
+									"",
+									"tests['Test script is updated'] = testVersion == \"0.1.0\";",
+									"tests['Tests syntax is ok'] = true;",
+									"",
+									"try {",
+									"    const responseJson = JSON.parse(responseBody);",
+									"    tests['Status code is 404'] = responseCode.code === 404;",
+									"    tests['ok is false'] = responseJson.ok === false;",
+									"    tests['error code is 404'] = responseJson.error_code === 404;",
+									"    tests['error_description'] = responseJson.error_description === \"Command not found!\";",
+									"} catch (e) {",
+									"    tests['Tests syntax is ok'] = false;",
+									"    console.error(e);",
+									"}"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"'use strict';",
+									"",
+									"/*global",
+									"tests, postman, responseBody, responseCode",
+									"*/",
+									"",
+									"postman.clearGlobalVariables();",
+									"postman.setGlobalVariable(\"PTS_TESET_VERSION\", \"0.1.0\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{BASEURL}}{{VERSION}}/sendMessage",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"to\": \"09151231234\",\n  \"text\": \"Hello This is a test API\",\n  \"from\": -1,\n  \"Username\": \"Demos\",\n  \"Password\": \"\"\n}"
+						},
+						"description": "Command not found!"
+					},
+					"response": []
+				},
+				{
+					"name": "error_100",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"'use strict';",
+									"/*global",
+									"tests, postman, responseBody, responseCode",
+									"*/",
+									"const testVersion = postman.getGlobalVariable(\"PTS_TESET_VERSION\");",
+									"",
+									"tests['Test script is updated'] = testVersion == \"0.1.0\";",
+									"tests['Tests syntax is ok'] = true;",
+									"",
+									"try {",
+									"    const responseJson = JSON.parse(responseBody);",
+									"    tests['Status code is 200'] = responseCode.code === 200;",
+									"    tests['ok is false'] = responseJson.ok === false;",
+									"    tests['error code is 100'] = responseJson.error_code === 100;",
+									"    tests['error_description'] = responseJson.error_description === \"Request method must be `POST`.\";",
+									"} catch (e) {",
+									"    tests['Tests syntax is ok'] = false;",
+									"    console.error(e);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{BASEURL}}{{VERSION}}/sendMessage/{{TOKEN}}",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Request method must be `POST`."
+					},
+					"response": []
+				},
+				{
+					"name": "error_101",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"'use strict';",
+									"/*global",
+									"tests, postman, responseBody, responseCode",
+									"*/",
+									"const testVersion = postman.getGlobalVariable(\"PTS_TESET_VERSION\");",
+									"",
+									"tests['Test script is updated'] = testVersion == \"0.1.0\";",
+									"tests['Tests syntax is ok'] = true;",
+									"",
+									"try {",
+									"    const responseJson = JSON.parse(responseBody);",
+									"    tests['Status code is 200'] = responseCode.code === 200;",
+									"    tests['ok is false'] = responseJson.ok === false;",
+									"    tests['error_description'] = responseJson.error_description === \"Token in not defined in url!\";",
+									"} catch (e) {",
+									"    tests['Tests syntax is ok'] = false;",
+									"    console.error(e);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{BASEURL}}{{VERSION}}/sendMessage/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"to\": \"09151231234\",\n  \"text\": \"Hello This is a test API\",\n  \"from\": -1,\n  \"Username\": \"Demos\",\n  \"Password\": \"\"\n}"
+						},
+						"description": "Token in not defined in url!"
+					},
+					"response": []
+				},
+				{
+					"name": "error_102",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"'use strict';",
+									"/*global",
+									"tests, postman, responseBody, responseCode",
+									"*/",
+									"const testVersion = postman.getGlobalVariable(\"PTS_TESET_VERSION\");",
+									"",
+									"tests['Test script is updated'] = testVersion == \"0.1.0\";",
+									"tests['Tests syntax is ok'] = true;",
+									"",
+									"try {",
+									"    const responseJson = JSON.parse(responseBody);",
+									"    tests['Status code is 200'] = responseCode.code === 200;",
+									"    tests['ok is false'] = responseJson.ok === false;",
+									"    tests['error_description'] = responseJson.error_description === \"Token in not valid!\";",
+									"} catch (e) {",
+									"    tests['Tests syntax is ok'] = false;",
+									"    console.error(e);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{BASEURL}}{{VERSION}}/sendMessage/api_test_0vq",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"to\": \"09151231234\",\n  \"text\": \"Hello This is a test API\",\n  \"from\": -1,\n  \"Username\": \"Demos\",\n  \"Password\": \"\"\n}"
+						},
+						"description": "Token in not valid!"
+					},
+					"response": []
+				},
+				{
+					"name": "error_103",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"'use strict';",
+									"/*global",
+									"tests, postman, responseBody, responseCode",
+									"*/",
+									"const testVersion = postman.getGlobalVariable(\"PTS_TESET_VERSION\");",
+									"",
+									"tests['Test script is updated'] = testVersion == \"0.1.0\";",
+									"tests['Tests syntax is ok'] = true;",
+									"",
+									"try {",
+									"    const responseJson = JSON.parse(responseBody);",
+									"    tests['Status code is 200'] = responseCode.code === 200;",
+									"    tests['ok is false'] = responseJson.ok === false;",
+									"    tests['error code is 103'] = responseJson.error_code === 103;",
+									"    tests['postData'] = responseJson.postData === \"{\\n\\tjafang\\n    \\\"to\\\": \\\"09151231234\\\",\\n    \\\"text\\\": \\\"Hello This is a test API\\\",\\n    \\\"from\\\": -1,\\n    \\\"Username\\\": \\\"Demos\\\",\\n    \\\"Password\\\": \\\"\\\"\\n}\";",
+									"    tests['error_description'] = responseJson.error_description === \"Cannot parse your data!\";",
+									"} catch (e) {",
+									"    tests['Tests syntax is ok'] = false;",
+									"    console.error(e);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{BASEURL}}{{VERSION}}/sendMessage/{{TOKEN}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\tjafang\n    \"to\": \"09151231234\",\n    \"text\": \"Hello This is a test API\",\n    \"from\": -1,\n    \"Username\": \"Demos\",\n    \"Password\": \"\"\n}"
+						},
+						"description": "Cannot parse your data."
+					},
+					"response": []
+				},
+				{
+					"name": "error_105",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"'use strict';",
+									"/*global",
+									"tests, postman, responseBody, responseCode",
+									"*/",
+									"const testVersion = postman.getGlobalVariable(\"PTS_TESET_VERSION\");",
+									"",
+									"tests['Test script is updated'] = testVersion == \"0.1.0\";",
+									"tests['Tests syntax is ok'] = true;",
+									"",
+									"try {",
+									"    const responseJson = JSON.parse(responseBody);",
+									"    tests['Status code is 200'] = responseCode.code === 200;",
+									"    tests['ok is false'] = responseJson.ok === false;",
+									"    tests['error code is 105'] = responseJson.error_code === 105;",
+									"    tests['error_description'] = responseJson.error_description === \"Necessary field in your data is missing!\";",
+									"} catch (e) {",
+									"    tests['Tests syntax is ok'] = false;",
+									"    console.error(e);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{BASEURL}}{{VERSION}}/sendMessage/{{TOKEN}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n  \n  \"Username\": \"Demos\",\n  \"Password\": \"\"\n}"
+						},
+						"description": "Necessary field in your data is missing!"
+					},
+					"response": []
+				},
+				{
+					"name": "error_106",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"'use strict';",
+									"/*global",
+									"tests, postman, responseBody, responseCode",
+									"*/",
+									"const testVersion = postman.getGlobalVariable(\"PTS_TESET_VERSION\");",
+									"",
+									"tests['Test script is updated'] = testVersion == \"0.1.0\";",
+									"tests['Tests syntax is ok'] = true;",
+									"",
+									"try {",
+									"    const responseJson = JSON.parse(responseBody);",
+									"    tests['Status code is 200'] = responseCode.code === 200;",
+									"    tests['ok is false'] = responseJson.ok === false;",
+									"    tests['error code is 106'] = responseJson.error_code === 106;",
+									"    tests['error_description'] = responseJson.error_description === 'Message not found in your data, you can set \"sendAllContent\".';",
+									"} catch (e) {",
+									"    tests['Tests syntax is ok'] = false;",
+									"    console.error(e);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{BASEURL}}{{VERSION}}/sendMessage/{{TOKEN}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"to\": \"09151231234\",\n  \"text\": \"Hello This is a test API\",\n  \"from\": -1,\n  \"Username\": \"Demos\",\n  \"Password\": \"\"\n}"
+						},
+						"description": "SMS center not defined properly for this token!"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Send SMS",
+			"description": "",
+			"item": [
+				{
+					"name": "send SMS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"'use strict';",
+									"/*global",
+									"tests, postman, responseBody, responseCode",
+									"*/",
+									"const testVersion = postman.getGlobalVariable(\"PTS_TESET_VERSION\");",
+									"",
+									"tests['Test script is updated'] = testVersion == \"0.1.0\";",
+									"tests['Tests syntax is ok'] = true;",
+									"",
+									"try {",
+									"    const responseJson = JSON.parse(responseBody);",
+									"    tests['Status code is 200'] = responseCode.code === 200;",
+									"    tests['ok is true'] = responseJson.ok === true;",
+									"} catch (e) {",
+									"    tests['Tests syntax is ok'] = false;",
+									"    console.error(e);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{BASEURL}}{{VERSION}}/sendMessage/{{TOKEN}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"to\":       \"09151234567\",\n    \"text\":     \"Hello This is a test API\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "send SMS with different panel account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"'use strict';",
+									"/*global",
+									"tests, postman, responseBody, responseCode",
+									"*/",
+									"const testVersion = postman.getGlobalVariable(\"PTS_TESET_VERSION\");",
+									"",
+									"tests['Test script is updated'] = testVersion == \"0.1.0\";",
+									"tests['Tests syntax is ok'] = true;",
+									"",
+									"try {",
+									"    const responseJson = JSON.parse(responseBody);",
+									"    tests['Status code is 200'] = responseCode.code === 200;",
+									"    tests['ok is true'] = responseJson.ok === true;",
+									"} catch (e) {",
+									"    tests['Tests syntax is ok'] = false;",
+									"    console.error(e);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{BASEURL}}{{VERSION}}/sendMessage/{{TOKEN}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"to\":       \"09151234567\",\n    \"text\":     \"Hello This is a test API\",\n    \"from\":     \"-1\",\n    \"username\": \"Demos\",\n    \"password\": \"\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
