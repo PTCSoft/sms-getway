@@ -38,7 +38,7 @@ export default async function (token: string, smsData: smsDataType): Promise<any
     password: smsData.password || tokenObj.password,
   };
 
-  if (!(sendParameter.to && sendParameter.text && sendParameter.from && sendParameter.username && sendParameter.password)) {
+  if (!(sendParameter.to && sendParameter.text && sendParameter.from && sendParameter.username && 'password' in sendParameter)) {
     throw {code: 105};
   }
 
