@@ -1,6 +1,6 @@
 {
   "name": "sms-getway",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PTC SMS Getway",
   "engines": {
     "node": ">=6.5"
