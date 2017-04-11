@@ -3,7 +3,7 @@ version: '2'
 networks:
   server-proxy:
     external:
-      name: webnet
+      name: serverproxy_default
 
 services:
   node:
