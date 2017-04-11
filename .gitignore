@@ -31,5 +31,9 @@ dev-env.sh
 /dist
 docker-compose.override.yml
 
+# nginx configs
+nginx-proxy.conf*
+!nginx-proxy.conf.sample
+
 # data storage
 /storage
